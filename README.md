@@ -63,3 +63,5 @@ Si el archivo local ya existe, ejecuta en PowerShell dentro de esta carpeta:
     .\configurar-local.ps1 -Actualizar -Usuario root -Servidor 127.0.0.1 -Puerto 3306
 
 Introduce la contraseña directamente en la terminal. Conserva la base elegida, JWT, Mapbox y las demás opciones locales. Para cambiar también la base añade -BaseDeDatos agroflet (actualización de la base anterior) o -BaseDeDatos agroflet_learning_center (instalación independiente). Después ejecuta el perfil http en Rider y comprueba /health/ready. Workbench y el backend deben usar el mismo servidor, puerto y usuario.
+
+Para publicar la API con Scalar, consulta [Despliegue en Render](docs/DESPLIEGUE-RENDER.md).
