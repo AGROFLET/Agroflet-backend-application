@@ -10,7 +10,7 @@ services:
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
-      - key: ASPNETCORE_HTTP_PORTS
+      - key: PORT
         value: "10000"
       - key: Jwt__Key
         generateValue: true
@@ -20,3 +20,9 @@ services:
         value: "true"
       - key: PasswordReset__ReturnTokenInDevelopment
         value: "false"
+      - key: Cors__AllowedOrigins__0
+        sync: false
+      - key: PasswordReset__FrontendUrl
+        sync: false
+      - key: Mapbox__AccessToken
+        sync: false
