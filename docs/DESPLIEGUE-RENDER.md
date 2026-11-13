@@ -31,3 +31,36 @@ Agrega al README y al reporte las URL reales del repositorio, Scalar público y 
 3. Abre /health/ready. En DevTools > Network, recarga y captura la solicitud con HTTP 200.
 4. En Scalar, inicia sesión con la cuenta de demostración y prueba GET /api/v1/shipments. Cierra Request Headers y oculta el campo Bearer Token antes de capturar el estado HTTP y el cuerpo de la respuesta.
 5. Usa Win + Shift + S, selecciona el área y guarda las capturas como render-live.png, scalar-publico.png, health-ready.png y shipments-200.png. Si documentas la base, captura su estado desde el proveedor y oculta las credenciales.
+
+## Blueprint gratuito para la demostración
+
+El archivo `render.yaml` configura un Web Service Docker con plan `free`,
+puerto 10000 y comprobación `/health/ready`. Render genera la clave JWT;
+la conexión MySQL se introduce como secreto al crear el Blueprint.
+
+1. Verifica el correo de tu cuenta de Render.
+2. Crea una base MySQL remota vacía de demostración. La base de Workbench en
+   `localhost:3306` no es accesible desde Render y no se modifica.
+3. En Render, crea un Blueprint desde este repositorio y la rama `main`.
+4. Introduce `ConnectionStrings__DefaultConnection` con los datos del proveedor.
+   Para un proveedor con cinco conexiones concurrentes, limita el pool a cuatro.
+   Ejemplo sin credenciales reales:
+
+   `Server=HOST;Port=PUERTO;Database=BASE;User=USUARIO;Password=SECRETO;SslMode=Required;MaximumPoolSize=4;`
+
+   Usa la validación de certificados que indique el proveedor. No desactives TLS.
+5. Revisa que el servicio muestre el plan Free antes de crearlo. Las migraciones
+   se aplican al iniciar y necesitan permisos sobre la base de demostración.
+6. Verifica `/health/ready`, `/scalar/v1`, `/openapi/v1.json` y una consulta autenticada.
+
+El plan gratuito de Filess publica 10 MB por base y cinco conexiones concurrentes;
+comprobar límites y TLS al crear la instancia. Se propone únicamente para una
+pequeña demostración, con cuentas y datos de prueba. Si el esquema o los datos
+exceden la cuota, no se debe activar un plan de pago automáticamente.
+
+Esta configuración no acredita un despliegue completado. Registra la URL pública
+solo después de verificar el servicio y su base remota.
+
+Referencias: https://render.com/docs/blueprint-spec,
+https://render.com/docs/free, https://docs.filess.io/es/docs/pricing/plans/,
+https://support.filess.io/hc/wiki/en/categories/faq.
