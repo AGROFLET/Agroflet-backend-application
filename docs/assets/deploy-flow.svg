@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 260" width="1100" height="260" role="img" aria-label="Flujo de despliegue: GitHub main, build Docker en Render, servicio web en Render y base TiDB Cloud">
+  <style>
+    .t { font-family: Segoe UI, Helvetica, Arial, sans-serif; fill: #e6edf3; }
+    .h { font-size: 19px; font-weight: 700; }
+    .s { font-size: 13.5px; fill: #9fb3c8; }
+    .wire { stroke: #3d4f63; stroke-width: 3; fill: none; stroke-dasharray: 8 8; }
+  </style>
+  <rect width="1100" height="260" rx="18" fill="#0d1117"/>
+
+  <!-- conectores -->
+  <path id="w1" class="wire" d="M232 130 H292"><animate attributeName="stroke-dashoffset" from="16" to="0" dur="0.6s" repeatCount="indefinite"/></path>
+  <path id="w2" class="wire" d="M512 130 H572"><animate attributeName="stroke-dashoffset" from="16" to="0" dur="0.6s" repeatCount="indefinite"/></path>
+  <path id="w3" class="wire" d="M792 130 H852"><animate attributeName="stroke-dashoffset" from="16" to="0" dur="0.6s" repeatCount="indefinite"/></path>
+
+  <!-- paquetes viajando -->
+  <circle r="7" fill="#f78166"><animateMotion dur="2.4s" repeatCount="indefinite" path="M232 130 H292"/></circle>
+  <circle r="7" fill="#46e3b7"><animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite" path="M512 130 H572"/></circle>
+  <circle r="7" fill="#58a6ff"><animateMotion dur="1.2s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear" path="M792 130 H852"/></circle>
+
+  <!-- 1 GitHub -->
+  <rect rx="14" stroke-width="2" x="22" y="58" width="210" height="144" fill="#161b22" stroke="#f78166"/>
+  <text class="t h" x="127" y="98" text-anchor="middle">1 · GitHub</text>
+  <text class="t s" x="127" y="126" text-anchor="middle">AGROFLET/</text>
+  <text class="t s" x="127" y="145" text-anchor="middle">Agroflet-backend-application</text>
+  <text class="t s" x="127" y="172" text-anchor="middle">push a main</text>
+
+  <!-- 2 Build -->
+  <rect rx="14" stroke-width="2" x="302" y="58" width="210" height="144" fill="#161b22" stroke="#46e3b7"/>
+  <text class="t h" x="407" y="98" text-anchor="middle">2 · Build</text>
+  <text class="t s" x="407" y="126" text-anchor="middle">Blueprint render.yaml</text>
+  <text class="t s" x="407" y="145" text-anchor="middle">Dockerfile multi-stage</text>
+  <text class="t s" x="407" y="164" text-anchor="middle">sdk:10.0 → aspnet:10.0</text>
+  <g transform="translate(407 186)">
+    <circle r="8" fill="none" stroke="#46e3b7" stroke-width="3" stroke-dasharray="30 20">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- 3 Web Service -->
+  <rect rx="14" stroke-width="2" x="582" y="58" width="210" height="144" fill="#161b22" stroke="#46e3b7"/>
+  <text class="t h" x="687" y="98" text-anchor="middle">3 · Render Web</text>
+  <text class="t s" x="687" y="126" text-anchor="middle">Kestrel en $PORT (10000)</text>
+  <text class="t s" x="687" y="145" text-anchor="middle">Migraciones EF al iniciar</text>
+  <text class="t s" x="687" y="164" text-anchor="middle">Health: /health/ready</text>
+  <circle cx="650" cy="184" r="6" fill="#46e3b7"><animate attributeName="opacity" values="1;0.25;1" dur="1.4s" repeatCount="indefinite"/></circle>
+  <text class="t" x="664" y="189" font-size="14" font-weight="700" fill="#46e3b7">LIVE</text>
+
+  <!-- 4 TiDB -->
+  <rect rx="14" stroke-width="2" x="862" y="58" width="216" height="144" fill="#161b22" stroke="#58a6ff"/>
+  <text class="t h" x="970" y="98" text-anchor="middle">4 · TiDB Cloud</text>
+  <text class="t s" x="970" y="126" text-anchor="middle">Starter · compatible MySQL</text>
+  <text class="t s" x="970" y="145" text-anchor="middle">sa-east-1 · puerto 4000</text>
+  <text class="t s" x="970" y="164" text-anchor="middle">TLS (SslMode=VerifyFull)</text>
+  <g transform="translate(970 184)" fill="none" stroke="#58a6ff" stroke-width="2">
+    <ellipse rx="14" ry="4"/><path d="M-14 0 v10 a14 4 0 0 0 28 0 v-10"/>
+  </g>
+
+  <text class="t" x="550" y="34" text-anchor="middle" font-size="15" fill="#9fb3c8">Cada push a main redespliega automáticamente</text>
+  <text class="t" x="550" y="236" text-anchor="middle" font-size="15" fill="#9fb3c8">Secretos en variables de entorno de Render · ninguna credencial en el repositorio</text>
+</svg>

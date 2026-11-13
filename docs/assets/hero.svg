@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320" role="img" aria-label="AgroFlet Platform API: camión de carga agrícola recorriendo la ruta">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f3d2e"/>
+      <stop offset="1" stop-color="#1b5e40"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f8f4f"/>
+      <stop offset="1" stop-color="#2d6b3a"/>
+    </linearGradient>
+    <g id="wheat">
+      <path d="M0 0 v-34" stroke="#e9c46a" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="-4" cy="-28" rx="3" ry="6" fill="#f4d58d" transform="rotate(-25 -4 -28)"/>
+      <ellipse cx="4" cy="-22" rx="3" ry="6" fill="#f4d58d" transform="rotate(25 4 -22)"/>
+      <ellipse cx="-4" cy="-16" rx="3" ry="6" fill="#f4d58d" transform="rotate(-25 -4 -16)"/>
+      <ellipse cx="0" cy="-36" rx="2.6" ry="5.5" fill="#f4d58d"/>
+    </g>
+  </defs>
+
+  <rect width="1200" height="320" rx="18" fill="url(#sky)"/>
+
+  <!-- sol -->
+  <circle cx="1060" cy="70" r="34" fill="#f4a261" opacity="0.9">
+    <animate attributeName="r" values="32;37;32" dur="4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- colinas -->
+  <path d="M0 210 Q 200 150 420 205 T 860 195 T 1200 200 V320 H0Z" fill="url(#field)"/>
+
+  <!-- trigo -->
+  <g>
+    <use href="#wheat" x="80" y="236"/><use href="#wheat" x="104" y="240"/><use href="#wheat" x="128" y="234"/>
+    <use href="#wheat" x="1080" y="236"/><use href="#wheat" x="1104" y="240"/><use href="#wheat" x="1128" y="234"/>
+    <animateTransform attributeName="transform" type="skewX" values="0;2;0;-2;0" dur="5s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- carretera -->
+  <rect x="0" y="262" width="1200" height="40" fill="#2b2d31"/>
+  <line x1="0" y1="282" x2="1200" y2="282" stroke="#f1faee" stroke-width="4" stroke-dasharray="34 26">
+    <animate attributeName="stroke-dashoffset" from="0" to="-60" dur="0.8s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- camión -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="-260 0; 1260 0" dur="9s" repeatCount="indefinite"/>
+    <g>
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 -1.5; 0 0" dur="0.35s" repeatCount="indefinite"/>
+      <rect x="0" y="214" width="150" height="52" rx="6" fill="#f1faee"/>
+      <text x="75" y="247" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#1b5e40">AgroFlet</text>
+      <path d="M150 228 h34 l22 22 v16 h-56z" fill="#e76f51"/>
+      <rect x="160" y="233" width="20" height="14" rx="2" fill="#a8dadc"/>
+    </g>
+    <g fill="#1d1d1f" stroke="#cfd3d6" stroke-width="3">
+      <circle cx="34" cy="268" r="11"/><circle cx="114" cy="268" r="11"/><circle cx="182" cy="268" r="11"/>
+    </g>
+  </g>
+
+  <!-- título -->
+  <text x="60" y="78" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="46" font-weight="800" fill="#f1faee">AgroFlet Platform API</text>
+  <text x="62" y="116" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#cde8d6">Logística de envíos agrícolas: flota, envíos, seguimiento e incidencias</text>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600">
+    <rect x="62" y="134" width="150" height="30" rx="15" fill="#512bd4"/><text x="137" y="154" text-anchor="middle" fill="#fff">ASP.NET Core 10</text>
+    <rect x="222" y="134" width="150" height="30" rx="15" fill="#00758f"/><text x="297" y="154" text-anchor="middle" fill="#fff">MySQL · TiDB</text>
+    <rect x="382" y="134" width="150" height="30" rx="15" fill="#46e3b7"/><text x="457" y="154" text-anchor="middle" fill="#0b2e22">Render · Docker</text>
+    <g>
+      <rect x="542" y="134" width="96" height="30" rx="15" fill="#0b2e22" stroke="#46e3b7"/>
+      <circle cx="562" cy="149" r="5" fill="#46e3b7">
+        <animate attributeName="opacity" values="1;0.2;1" dur="1.4s" repeatCount="indefinite"/>
+      </circle>
+      <text x="600" y="154" text-anchor="middle" fill="#46e3b7">LIVE</text>
+    </g>
+  </g>
+</svg>
