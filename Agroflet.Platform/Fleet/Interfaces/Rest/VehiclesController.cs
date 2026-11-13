@@ -1,0 +1,31 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Agroflet.Platform.Fleet.Application.CommandServices;
+using Agroflet.Platform.Fleet.Application.QueryServices;
+using Agroflet.Platform.Fleet.Domain.Model.Queries;
+using Agroflet.Platform.Fleet.Interfaces.Rest.Resources;
+using Agroflet.Platform.Fleet.Interfaces.Rest.Transform;
+using Agroflet.Platform.Shared.Application.Internal.OutboundServices;
+using Agroflet.Platform.Shared.Domain.Model.Queries;
+namespace Agroflet.Platform.Fleet.Interfaces.Rest;
+
+[ApiController, Authorize, Route("api/v1/vehicles"), Tags("Fleet")]
+public class VehiclesController(IVehicleQueryService queries, IVehicleCommandService commands, ICurrentUser user) : ControllerBase
+{
+    public record VehicleStatusResource(string Status);
+    [HttpPatch("{id:int}/status")]
+    public Task<ActionResult> Status(int id, VehicleStatusResource resource, CancellationToken ct)
+        => Update(id, new UpdateVehicleResource(Status: resource.Status), ct);
+    [HttpGet]
+    public async Task<ActionResult> GetAll(CancellationToken ct) => this.FromResult(await queries.Handle(new CollectionQuery(Request.Query.ToDictionary(p => p.Key, p => p.Value.Select(v => v ?? "").ToArray())), ct), value => Ok((value).Select(VehicleResourceFromEntityAssembler.ToResourceFromEntity)));
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult> GetById(int id, CancellationToken ct) => this.FromResult(await queries.Handle(new GetVehicleByIdQuery(id), ct), value => Ok(VehicleResourceFromEntityAssembler.ToResourceFromEntity(value)));
+    [HttpPost]
+    public async Task<ActionResult> Create(CreateVehicleResource resource, CancellationToken ct)
+    {
+        var result = await commands.Handle(CreateVehicleCommandFromResourceAssembler.ToCommandFromResource(resource, user.Id), ct);
+        return this.FromResult(result, entity => CreatedAtAction(nameof(GetById), new { id = entity.Id }, VehicleResourceFromEntityAssembler.ToResourceFromEntity(entity)));
+    }
+    [HttpPatch("{id:int}"), HttpPut("{id:int}")]
+    public async Task<ActionResult> Update(int id, UpdateVehicleResource resource, CancellationToken ct) => this.FromResult(await commands.Handle(UpdateVehicleCommandFromResourceAssembler.ToCommandFromResource(id, resource), ct), value => Ok(VehicleResourceFromEntityAssembler.ToResourceFromEntity(value)));
+}

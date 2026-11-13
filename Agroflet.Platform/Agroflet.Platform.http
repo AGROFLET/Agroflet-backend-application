@@ -1,0 +1,107 @@
+@baseUrl = http://localhost:5080/api/v1
+@token = REPLACE_WITH_SIGN_IN_ACCESS_TOKEN
+@buyerId = 2
+@vehicleId = 1
+@driverId = 1
+@shipmentId = 1
+@expectedVersion = 0
+
+### Register dispatcher (repeat with userType buyer and another email)
+POST {{baseUrl}}/authentication/sign-up
+Content-Type: application/json
+
+{
+  "firstName": "Rosa",
+  "lastName": "Quispe",
+  "email": "rosa@example.com",
+  "password": "ReplaceWithYourPassword2026!",
+  "userType": "dispatcher",
+  "phone": "987654321",
+  "companyName": "Cooperativa del Mantaro",
+  "preferredLanguage": "es"
+}
+
+### Sign in; copy accessToken to the token variable
+POST {{baseUrl}}/authentication/sign-in
+Content-Type: application/json
+
+{"email":"rosa@example.com","password":"ReplaceWithYourPassword2026!"}
+
+### Register vehicle
+POST {{baseUrl}}/vehicles
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"plate":"ABC-123","brand":"Volvo","model":"FM","year":2022,"capacityTons":12,"bodyType":"dry_van"}
+
+### Register driver
+POST {{baseUrl}}/drivers
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"firstName":"Luis","lastName":"Soto","dni":"12345678","licenseNumber":"A12345678","licenseCategory":"A-IIIb","phone":"987654321"}
+
+### Create shipment: replace IDs and dates as appropriate
+POST {{baseUrl}}/shipments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "buyerId": {{buyerId}},
+  "cargoType": "potato",
+  "cargoDescription": "Papa fresca",
+  "weightTons": 8,
+  "originId": 1,
+  "destinationId": 7,
+  "vehicleId": {{vehicleId}},
+  "driverId": {{driverId}},
+  "plannedDepartureAt": "2027-01-20T11:00:00Z",
+  "estimatedArrivalAt": "2027-01-20T19:00:00Z"
+}
+
+### Start transit; resources were reserved when the shipment was created. Read current version first.
+PATCH {{baseUrl}}/shipments/{{shipmentId}}/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"status":"in_transit","expectedVersion":{{expectedVersion}}}
+
+### Read timeline
+GET {{baseUrl}}/status-changes?shipmentId={{shipmentId}}&_sort=changedAt&_order=asc
+Authorization: Bearer {{token}}
+
+### Cancel active shipment
+PATCH {{baseUrl}}/shipments/{{shipmentId}}/status
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"status":"cancelled","cancellationReason":"Solicitud del comprador","expectedVersion":{{expectedVersion}}}
+
+### Paginated search
+GET {{baseUrl}}/shipments?page=1&pageSize=20&search=ABC
+Authorization: Bearer {{token}}
+
+### Read current version before a transition
+GET {{baseUrl}}/shipments/{{shipmentId}}
+Authorization: Bearer {{token}}
+
+### Update editable vehicle data (preserves ownership and allocation)
+PUT {{baseUrl}}/vehicles/{{vehicleId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"brand":"Volvo","model":"FM","year":2024,"capacityTons":12,"bodyType":"dry_van","plate":"ABC-123"}
+
+### Route from Mapbox (requires server configuration)
+GET {{baseUrl}}/shipments/{{shipmentId}}/planned-route
+Authorization: Bearer {{token}}
+
+### Contact receipt; no anonymous listing exists
+POST {{baseUrl}}/contact-messages
+Content-Type: application/json
+
+{"name":"Visitante de prueba","email":"visitor@example.com","message":"Consulta de prueba académica"}
+
+### Revoke this session
+POST {{baseUrl}}/auth/logout
+Authorization: Bearer {{token}}

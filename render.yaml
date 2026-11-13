@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: agroflet-backend-application
+    runtime: docker
+    plan: free
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health/ready
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: PORT
+        value: "10000"
+      - key: Jwt__Key
+        generateValue: true
+      - key: ConnectionStrings__DefaultConnection
+        sync: false
+      - key: Database__ApplyMigrations
+        value: "true"
+      - key: PasswordReset__ReturnTokenInDevelopment
+        value: "false"
+      - key: Cors__AllowedOrigins__0
+        sync: false
+      - key: PasswordReset__FrontendUrl
+        sync: false
+      - key: Mapbox__AccessToken
+        sync: false
