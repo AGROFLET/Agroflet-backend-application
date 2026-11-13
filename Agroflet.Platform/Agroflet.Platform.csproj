@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <UserSecretsId>agroflet-learning-center-local</UserSecretsId>
+        <LangVersion>14.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>false</InvariantGlobalization>
+        <Version>1.1.0</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Entity Framework Core related packages -->
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+        <!-- MySQL Entity Framework Core related packages -->
+        <PackageReference Include="MySql.EntityFrameworkCore" Version="10.0.12" />
+        <!-- Naming convention conversion related packages -->
+        <PackageReference Include="Humanizer" Version="3.0.10" />
+        <PackageReference Include="Scalar.AspNetCore" Version="2.18.0" />
+    </ItemGroup>
+
+<ItemGroup><PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.14" /></ItemGroup>
+<ItemGroup>
+        <PackageReference Include="Cortex.Mediator" Version="3.1.2" />
+        <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+    </ItemGroup>
+</Project>
+
