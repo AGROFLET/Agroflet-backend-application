@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+<resheader name="version"><value>2.0</value></resheader>
+<data name="validation-error" xml:space="preserve"><value>Solicitud inválida. Revisa los valores enviados.</value></data>
+<data name="not-found" xml:space="preserve"><value>No se encontró el recurso solicitado.</value></data>
+<data name="invalid-credentials" xml:space="preserve"><value>Correo o contraseña incorrectos.</value></data>
+<data name="email-taken" xml:space="preserve"><value>Este correo ya está registrado.</value></data>
+<data name="unauthorized" xml:space="preserve"><value>Debes iniciar sesión.</value></data>
+<data name="forbidden" xml:space="preserve"><value>No tienes permiso para realizar esta operación.</value></data>
+<data name="unexpected-error" xml:space="preserve"><value>Ocurrió un error inesperado.</value></data>
+<data name="concurrent-update-retry" xml:space="preserve"><value>El recurso cambió. Actualiza los datos antes de reintentar.</value></data>
+<data name="duplicate-or-invalid-reference" xml:space="preserve"><value>Datos duplicados o referencia inválida.</value></data>
+<data name="resources-unavailable" xml:space="preserve"><value>El vehículo o conductor no está disponible.</value></data>
+<data name="weight-exceeds-capacity" xml:space="preserve"><value>La carga supera la capacidad del vehículo.</value></data>
+<data name="invalid-transition" xml:space="preserve"><value>El cambio de estado del envío no es válido.</value></data>
+<data name="not-in-transit" xml:space="preserve"><value>El envío debe estar en tránsito.</value></data>
+<data name="idempotency-key-reused" xml:space="preserve"><value>Esta clave ya se utilizó con datos distintos.</value></data>
+<data name="invalid-reset-token" xml:space="preserve"><value>El token de recuperación es inválido o expiró.</value></data>
+<data name="wrong-current-password" xml:space="preserve"><value>La contraseña actual es incorrecta.</value></data>
+<data name="status-locked" xml:space="preserve"><value>Este recurso está reservado por un envío activo.</value></data>
+</root>

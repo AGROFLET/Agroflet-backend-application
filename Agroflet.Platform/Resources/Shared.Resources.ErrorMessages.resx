@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+<resheader name="version"><value>2.0</value></resheader>
+<data name="validation-error" xml:space="preserve"><value>Invalid request. Check the submitted values.</value></data>
+<data name="not-found" xml:space="preserve"><value>The requested resource was not found.</value></data>
+<data name="invalid-credentials" xml:space="preserve"><value>Invalid email or password.</value></data>
+<data name="email-taken" xml:space="preserve"><value>This email is already registered.</value></data>
+<data name="unauthorized" xml:space="preserve"><value>Authentication is required.</value></data>
+<data name="forbidden" xml:space="preserve"><value>You are not authorized to perform this operation.</value></data>
+<data name="unexpected-error" xml:space="preserve"><value>An unexpected error occurred.</value></data>
+<data name="concurrent-update-retry" xml:space="preserve"><value>The resource changed. Refresh before retrying.</value></data>
+<data name="duplicate-or-invalid-reference" xml:space="preserve"><value>Duplicate data or an invalid reference.</value></data>
+<data name="resources-unavailable" xml:space="preserve"><value>The vehicle or driver is unavailable.</value></data>
+<data name="weight-exceeds-capacity" xml:space="preserve"><value>Cargo exceeds vehicle capacity.</value></data>
+<data name="invalid-transition" xml:space="preserve"><value>The shipment status transition is invalid.</value></data>
+<data name="not-in-transit" xml:space="preserve"><value>The shipment must be in transit.</value></data>
+<data name="idempotency-key-reused" xml:space="preserve"><value>This key was already used with different data.</value></data>
+<data name="invalid-reset-token" xml:space="preserve"><value>The recovery token is invalid or expired.</value></data>
+<data name="wrong-current-password" xml:space="preserve"><value>The current password is incorrect.</value></data>
+<data name="status-locked" xml:space="preserve"><value>This resource is reserved by an active shipment.</value></data>
+</root>
