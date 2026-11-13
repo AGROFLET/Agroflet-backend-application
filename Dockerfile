@@ -8,8 +8,9 @@ RUN dotnet publish Agroflet.Platform/Agroflet.Platform.csproj -c Release --no-re
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
-ENV ASPNETCORE_HTTP_PORTS=10000
+# Render inyecta PORT (10000 por defecto); se usa como puerto HTTP de Kestrel.
+ENV PORT=10000
 EXPOSE 10000
 COPY --from=build /app/publish .
 USER app
-ENTRYPOINT ["dotnet", "Agroflet.Platform.dll"]
+ENTRYPOINT ["sh", "-c", "export ASPNETCORE_HTTP_PORTS=\"${PORT:-10000}\" && exec dotnet Agroflet.Platform.dll"]

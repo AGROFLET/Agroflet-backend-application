@@ -1,7 +1,7 @@
 # Despliegue de AgroFlet en Render
 
 1. Prepara una base MySQL de demostración accesible desde Render. Crea una base vacía y una cuenta dedicada con permisos sobre esa base. Usa la configuración TLS que indique el proveedor.
-2. En Render crea un Web Service vinculado a AGROFLET/Agroflet-backend-application. Selecciona main, runtime Docker y Dockerfile en la raíz. El contenedor escucha en el puerto 10000.
+2. En Render crea un Web Service vinculado a AGROFLET/Agroflet-backend-application. Selecciona main, runtime Docker y Dockerfile en la raíz. El contenedor escucha en el puerto de la variable `PORT` que inyecta Render (10000 por defecto).
 3. Configura estas variables en el servicio:
 
    - ASPNETCORE_ENVIRONMENT=Production
@@ -9,6 +9,7 @@
    - Jwt__Key: secreto aleatorio de al menos 32 bytes.
    - Database__ApplyMigrations=true: aplica las migraciones al iniciar sobre la base de demostración.
    - Cors__AllowedOrigins__0: origen HTTPS del frontend, si lo conectas.
+   - PasswordReset__FrontendUrl: URL pública de la pantalla de restablecer contraseña del frontend.
    - Mapbox__AccessToken: token del servidor, si vas a demostrar el cálculo de rutas.
 
 4. Configura /health/ready como Health Check Path. Despliega y comprueba que el servicio está Live y que /health/ready devuelve HTTP 200.
@@ -53,10 +54,23 @@ la conexión MySQL se introduce como secreto al crear el Blueprint.
    se aplican al iniciar y necesitan permisos sobre la base de demostración.
 6. Verifica `/health/ready`, `/scalar/v1`, `/openapi/v1.json` y una consulta autenticada.
 
-El plan gratuito de Filess publica 10 MB por base y cinco conexiones concurrentes;
-comprobar límites y TLS al crear la instancia. Se propone únicamente para una
-pequeña demostración, con cuentas y datos de prueba. Si el esquema o los datos
-exceden la cuota, no se debe activar un plan de pago automáticamente.
+## Dónde alojar MySQL
+
+Render no ofrece MySQL gestionado. Opciones evaluadas (noviembre de 2026):
+
+| Opción | Coste | Notas |
+| --- | --- | --- |
+| TiDB Cloud Starter (recomendada) | Gratis, sin tarjeta | Compatible con MySQL, 5 GiB y 50 M RU al mes, TLS obligatorio, puerto 4000. |
+| Aiven for MySQL Developer | 5 USD/mes | MySQL real. Aiven ya no permite crear MySQL en el plan gratuito. |
+| Railway MySQL | Crédito de prueba y luego plan de pago | MySQL real en contenedor. |
+| Servicio privado MySQL en Render con disco | Instancia de pago y disco | Los discos persistentes no existen en el plan Free. |
+| Filess | Gratis | 10 MB por base y cinco conexiones: solo para una demo mínima. |
+
+Cadena de ejemplo para TiDB Cloud Starter (sin credenciales reales):
+
+`Server=gateway01.REGION.prod.aws.tidbcloud.com;Port=4000;Database=agroflet;User=PREFIJO.root;Password=SECRETO;SslMode=VerifyFull;`
+
+Crea antes la base `agroflet` desde la consola SQL de TiDB (`CREATE DATABASE agroflet;`).
 
 Esta configuración no acredita un despliegue completado. Registra la URL pública
 solo después de verificar el servicio y su base remota.
