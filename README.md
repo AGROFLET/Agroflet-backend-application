@@ -26,7 +26,6 @@ La API está desplegada y es pública:
 | 🌐 URL base | https://agroflet-backend-application.onrender.com |
 | 📖 Documentación interactiva (Scalar) | https://agroflet-backend-application.onrender.com/scalar/v1 |
 | 🧾 Especificación OpenAPI | https://agroflet-backend-application.onrender.com/openapi/v1.json |
-| 💚 Salud de la API y la base de datos | https://agroflet-backend-application.onrender.com/health/ready |
 
 > [!NOTE]
 > El servicio usa el plan gratuito de Render: si nadie lo usa durante un rato se duerme, y la primera petición puede tardar unos 50 segundos en responder. Las siguientes son inmediatas.
